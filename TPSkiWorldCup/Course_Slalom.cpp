@@ -1,4 +1,5 @@
 #include "Course_Slalom.h"
+#include "Participation.h"
 #include <iostream>
 #include <random> //random
 #include <algorithm> //sort
@@ -11,20 +12,21 @@ Course_Slalom::Course_Slalom() : nbParticipant(0) {}
 
 
 // Constructeur avec paramètres
-Course_Slalom::Course_Slalom(std::string emplacement, std::string date, Competiteur participants[])
+Course_Slalom::Course_Slalom(std::string emplacement, std::string date, Participation participants[])
     : emplacement(emplacement), date(date), nbParticipant(100) {
 
     std::cout << "localisation " << emplacement << " le " << date << endl;
-    for (int i = 0; i < 100; ++i) {
-        participants[i] = participants[i];
-    }
+
+	for (int i = 0; i < 100; ++i) {
+		this->participants[i] = participants[i];
+	}
 }
 
 // Méthode privée pour attribuer un numéro de dossard unique
 int Course_Slalom::attribuerDossard(int borneInf, int borneSup) {
-    std::randodevice rd;
+    std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniforint_distribution<> dis(borneInf, borneSup);
+    std::uniform_int_distribution<> dis(borneInf, borneSup);
 
     int dossard;
     do {
@@ -96,6 +98,6 @@ void Course_Slalom::traitementDossards() {
 // Affichage des participants
 void Course_Slalom::afficherParticipants() {
     for (int i = 0; i < nbParticipant; ++i) {
-        participants[i].afficheEtat();
+		participants[i].getCompetiteur()->afficheEtat();
     }
 }
