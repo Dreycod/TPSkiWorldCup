@@ -8,17 +8,17 @@ using namespace std;
 
 
 // Constructeur par défaut
-Course::Course() : m_nbParticipants(0) {}
+Course::Course() : nbParticipants(0) {}
 
 
 // Constructeur avec paramètres
 Course::Course(std::string emplacement, std::string date, Competiteur participants[])
 {
-    m_nomCompetition = emplacement;
-    m_dateCompetition = date;
+    nomCompetition = emplacement;
+    dateCompetition = date;
 
     for (int i = 0; i < 100; ++i) {
-        m_participants[i] = participants[i];
+        participants[i] = participants[i];
     }
 
     std::cout << "localisation " << emplacement << " le " << date << endl;
@@ -30,8 +30,8 @@ Course::Course(std::string emplacement, std::string date, Competiteur participan
 // Méthode pour afficher les participants (méthode par défaut)
 void Course::afficherParticipants()
 {
-    for (int i = 0; i < m_nbParticipants; ++i)
+    for (int i = 0; i < nbParticipants; ++i)
     {
-        m_participants[i].afficheEtat();
+        participants[i].afficheEtat();
     }
 }

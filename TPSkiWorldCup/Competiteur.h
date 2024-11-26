@@ -6,11 +6,11 @@
 
 class Competiteur {
 private:
-    int m_numeroCompetiteur;
-    std::string m_nomCompetiteur;
-    std::string m_prenomCompetiteur;
-    int m_classementFIS;
-    int m_classementWCSL;
+    int numeroCompetiteur;
+    std::string nomCompetiteur;
+    std::string prenomCompetiteur;
+    int classementFIS;
+    int classementWCSL;
 
     Participation participation; // Lien avec l'objet Participation
 

@@ -5,11 +5,11 @@
 
 class Participation {
 private:
-    int m_numDossard;   // Numéro de dossard
-    int m_classement;   // Classement calculé dans course slalom
-    int m_scoreFIS;     // Score FIS
-    int m_scoreWCSL;    // Score WCSL
-    int m_scoreTotal;
+    int numDossard;   // Numéro de dossard
+    int classement;   // Classement calculé dans course slalom
+    int scoreFIS;     // Score FIS
+    int scoreWCSL;    // Score WCSL
+    int scoreTotal;
 
 public:
     Participation();

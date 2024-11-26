@@ -15,11 +15,11 @@ public:
     virtual void afficherParticipants();  // Méthode pour afficher les participants
 
 private:
-    Competiteur m_participants[100];
-    std::string m_nomCompetition;
-    std::string m_dateCompetition;
+    Competiteur participants[100];
+    std::string nomCompetition;
+    std::string dateCompetition;
 
-    int m_nbParticipants;  // Nombre de participants dans la course
+    int nbParticipants;  // Nombre de participants dans la course
 
 
 protected:

@@ -7,11 +7,11 @@
 
 class Course_Slalom : public Course {
 private:
-    Competiteur m_participants[100]; // Tableau des compétiteurs
+    Competiteur participants[100]; // Tableau des compétiteurs
     bool dossardsAttribues[101] = { false }; // Suivi des dossards attribués (1 à 100)
-    std::string m_emplacement;
-    std::string m_date;
-    int m_nbParticipant;
+    std::string emplacement;
+    std::string date;
+    int nbParticipant;
 
     int attribuerDossard(int borneInf, int borneSup); // Méthode privée pour attribuer un dossard unique
 
@@ -23,4 +23,4 @@ public:
     void afficherParticipants(); // Afficher les participants avec les dossards
 };
 
-#endif // COURSE_SLALOM_HPP
+#endif // COURSE_SLALOHPP

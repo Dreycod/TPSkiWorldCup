@@ -5,18 +5,18 @@ using namespace std;
 
 //Constructeur
 
-Participation::Participation() : m_numDossard(0), m_classement(0) {}
+Participation::Participation() : numDossard(0), classement(0) {}
 
 
 
 //dossard
 
 void Participation::setNumDossard(int dossard) {  //setter num dossard
-    m_numDossard = dossard;
+    numDossard = dossard;
 }
 
 int Participation::getNumDossard() { //getter num dossard
-    return m_numDossard;
+    return numDossard;
 }
 
 
@@ -26,11 +26,11 @@ int Participation::getNumDossard() { //getter num dossard
 //classement
 
 void Participation::setClassement(int classement) {  //setter classement
-    m_classement = classement;
+    classement = classement;
 }
 
 int Participation::getClassement() { //getter classement
-    return m_classement;
+    return classement;
 }
 
 
