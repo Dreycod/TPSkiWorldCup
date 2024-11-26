@@ -1,26 +1,37 @@
+#include <iostream>
 #include "Participation.h"
 
-Participation::Participation()
-{
-}
- 
-Participation::Participation(int num, int classement, Competiteur Comp)
-{
-	this->numDossard = num;
-	this->classement = classement;
-	this->leCompetiteur = Comp;
+using namespace std;
+
+//Constructeur
+
+Participation::Participation() : m_numDossard(0), m_classement(0) {}
+
+
+
+//dossard
+
+void Participation::setNumDossard(int dossard) {  //setter num dossard
+    m_numDossard = dossard;
 }
 
-void Participation::setnumDossard(int numDossard)
-{
-	this->numDossard = numDossard;
+int Participation::getNumDossard() { //getter num dossard
+    return m_numDossard;
 }
 
-Competiteur Participation::getleCompetiteur()
-{
-	return this->leCompetiteur;
+
+
+
+
+//classement
+
+void Participation::setClassement(int classement) {  //setter classement
+    m_classement = classement;
 }
 
-Participation::~Participation()
-{
+int Participation::getClassement() { //getter classement
+    return m_classement;
 }
+
+
+

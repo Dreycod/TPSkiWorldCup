@@ -1,28 +1,31 @@
 #ifndef COURSE_HPP
 #define COURSE_HPP
-#include <string>  // Use angle brackets and include the standard namespace
-#include "Participation.h"
 
-using namespace std;
-class Participation {};
+#include <string>
+#include "Competiteur.H"
+
 class Course
 {
-protected:
-	void classerLesParticipants();
-	void classerLesParticipantsWCSL(bool ordered);
-	void classerLesParticipantsFIS(bool ordered);
-	void classerLesParticipantsParDossards(bool ordered);
-private:
-	string nomCompetition;
-	string dateCompetition;
-	Participation *  lesParticipants;	
 public:
-	Course();
-	void traitementDossards();
-	Participation getParticipant(int num);
-	void SetAttributs(string nom, string date, Participation * lesParticipants);
-	~Course();
+    Course();  // Constructeur par défaut
 
+    Course(std::string emplacement, std::string date, Competiteur participants[]);
+
+    virtual void traitementDossards() = 0;  // Méthode virtuelle pure pour l'attribution des dossards (implémentation spécifique dans les sous-classes)
+    virtual void afficherParticipants();  // Méthode pour afficher les participants
+
+private:
+    Competiteur m_participants[100];
+    std::string m_nomCompetition;
+    std::string m_dateCompetition;
+
+    int m_nbParticipants;  // Nombre de participants dans la course
+
+
+protected:
+    void classerLesParticipants();  // Méthode pour classer les participants (à utiliser dans les sous-classes)
 };
 
-#endif
+#endif /* COURSE_HPP */
+
+

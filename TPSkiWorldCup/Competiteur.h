@@ -1,21 +1,40 @@
 #ifndef COMPETITEUR_HPP
 #define COMPETITEUR_HPP
-#include <string>  // Use angle brackets and include the standard namespace
-using namespace std;
-class Competiteur
-{
+
+#include <string>
+#include "Participation.h"
+
+class Competiteur {
 private:
-	int numeroCompetiteur;
-	string nomCompetiteur;
-	string prenomCompetiteur;
-	int classementFIS;
-	int classementWCSL;
+    int m_numeroCompetiteur;
+    std::string m_nomCompetiteur;
+    std::string m_prenomCompetiteur;
+    int m_classementFIS;
+    int m_classementWCSL;
+
+    Participation participation; // Lien avec l'objet Participation
+
+
 public:
-	Competiteur(int num, string nom, string prenom, int FIS, int classementWCSL);
-	Competiteur();
-	int GetClassementFIS();
-	int GetClassementWCSL();
-	~Competiteur();
+    Competiteur();
+    Competiteur(int numero, std::string nom, std::string prenom, int fis, int wcsl);
+
+
+
+    int getClassementFIS();
+    int getClassementWCSL();
+
+    void setClassement(int classement); // Définit le classement via Participation
+    int getClassement();
+
+
+    std::string getNomCompetiteur();
+    std::string getPrenomCompetiteur();
+
+    void setNumDossard(int dossard);
+    int getNumDossard();
+
+    void afficheEtat();
 };
 
-#endif
+#endif // COMPETITEUR_HPP

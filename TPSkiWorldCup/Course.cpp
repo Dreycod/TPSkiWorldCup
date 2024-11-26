@@ -1,50 +1,37 @@
 #include "Course.h"
 #include <iostream>
 #include <string>
-#include "Participation.h"
+
 using namespace std;
 
-Course::Course()
+
+
+
+// Constructeur par défaut
+Course::Course() : m_nbParticipants(0) {}
+
+
+// Constructeur avec paramètres
+Course::Course(std::string emplacement, std::string date, Competiteur participants[])
 {
+    m_nomCompetition = emplacement;
+    m_dateCompetition = date;
+
+    for (int i = 0; i < 100; ++i) {
+        m_participants[i] = participants[i];
+    }
+
+    std::cout << "localisation " << emplacement << " le " << date << endl;
+
 }
 
-void Course::traitementDossards()
-{
-	
-}
 
-Participation Course::getParticipant(int i)
-{
-	Participation * lesParticipants = this->lesParticipants;
-	return lesParticipants[i];
-}
 
-Course::~Course()
+// Méthode pour afficher les participants (méthode par défaut)
+void Course::afficherParticipants()
 {
+    for (int i = 0; i < m_nbParticipants; ++i)
+    {
+        m_participants[i].afficheEtat();
+    }
 }
-
-void Course::classerLesParticipants()
-{
-}
-
-void Course::classerLesParticipantsWCSL(bool ordered)
-{
-	Participation* lesParticipants = this->lesParticipants;
-	
-	for (int i = 0; i < sizeof(lesParticipants); i++)
-	{
-		Participation Participant = lesParticipants[i];
-		Competiteur* leCompetiteur = Participant.getleCompetiteur();
-		int classementWSCL = lesParticipants[i].getleCompetiteur()->GetClassementWCSL()
-			;	
-	}
-}
-
-void Course::classerLesParticipantsFIS(bool ordered)
-{
-}
-
-void Course::classerLesParticipantsParDossards(bool ordered)
-{
-}
-

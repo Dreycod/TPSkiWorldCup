@@ -1,21 +1,26 @@
 #ifndef COURSE_SLALOM_HPP
 #define COURSE_SLALOM_HPP
-#include <string>  // Use angle brackets and include the standard namespace
-#include "Course.h"
-#include "Participation.h"
-using namespace std;
 
-class Course_Slalom: public Course
-{
+#include <string>
+#include "Competiteur.h"
+#include "Course.h"
+
+class Course_Slalom : public Course {
 private:
-	void attribuerDossard(int debut, int fin);
-	string nom;
-	string date;
-public: 
-	Course_Slalom(string nom, string date, Participation * lesParticipants);
-	~Course_Slalom();
-	void traitementDossards();
+    Competiteur m_participants[100]; // Tableau des compétiteurs
+    bool dossardsAttribues[101] = { false }; // Suivi des dossards attribués (1 à 100)
+    std::string m_emplacement;
+    std::string m_date;
+    int m_nbParticipant;
+
+    int attribuerDossard(int borneInf, int borneSup); // Méthode privée pour attribuer un dossard unique
+
+public:
+    Course_Slalom();
+    Course_Slalom(std::string emplacement, std::string date, Competiteur participants[]);
+
+    void traitementDossards(); // Méthode spécifique au slalom pour traiter les dossards
+    void afficherParticipants(); // Afficher les participants avec les dossards
 };
 
-#endif
-
+#endif // COURSE_SLALOM_HPP
