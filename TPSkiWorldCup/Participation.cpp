@@ -4,7 +4,7 @@ Participation::Participation()
 {
 }
  
-Participation::Participation(int num, int classement, Competiteur* Comp)
+Participation::Participation(int num, int classement, Competiteur Comp)
 {
 	this->numDossard = num;
 	this->classement = classement;
@@ -16,7 +16,7 @@ void Participation::setnumDossard(int numDossard)
 	this->numDossard = numDossard;
 }
 
-Competiteur* Participation::getleCompetiteur()
+Competiteur Participation::getleCompetiteur()
 {
 	return this->leCompetiteur;
 }

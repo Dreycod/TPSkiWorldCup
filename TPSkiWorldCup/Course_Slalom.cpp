@@ -16,14 +16,14 @@ void Course_Slalom::traitementDossards()
 {
 	bool ordered = false; 
 	
-	Course::classerLesParticipantsWCSL(ordered);
+	classerLesParticipantsWCSL(ordered);
 	attribuerDossard(1,7);
 	attribuerDossard(8, 15);
 
 	attribuerDossard(16, 30);
-	Course::classerLesParticipantsFIS(ordered);
+	classerLesParticipantsFIS(ordered);
 	attribuerDossard(30, 100);
-	Course::classerLesParticipantsParDossards(!ordered);
+	classerLesParticipantsParDossards(!ordered);
 }
 
 int getRandomNum(int debut, int fin)
@@ -40,7 +40,7 @@ void Course_Slalom::attribuerDossard(int debut, int fin)
 	{
 		for (int i = debut; i <= fin; i++)
 		{
-			Participation Participant = Course::getParticipant(i);
+			Participation Participant = getParticipant(i);
 			Participant.setnumDossard(i);
 
 		}

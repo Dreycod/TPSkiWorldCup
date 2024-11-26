@@ -29,6 +29,15 @@ void Course::classerLesParticipants()
 
 void Course::classerLesParticipantsWCSL(bool ordered)
 {
+	Participation* lesParticipants = this->lesParticipants;
+	
+	for (int i = 0; i < sizeof(lesParticipants); i++)
+	{
+		Participation Participant = lesParticipants[i];
+		Competiteur* leCompetiteur = Participant.getleCompetiteur();
+		int classementWSCL = lesParticipants[i].getleCompetiteur()->GetClassementWCSL()
+			;	
+	}
 }
 
 void Course::classerLesParticipantsFIS(bool ordered)
