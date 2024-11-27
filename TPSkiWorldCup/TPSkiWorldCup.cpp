@@ -189,7 +189,7 @@ int main() {
 
     Participation P13(0, 6, M); lesParticipants[12] = P13;
     Participation P14(0, 23, N); lesParticipants[13] = P14;
-    Participation P15(0, 31, O); lesParticipants[14] = P15;
+    Participation P15   (0, 31, O); lesParticipants[14] = P15;
 
     Participation P16(0, 22, P); lesParticipants[15] = P16;
     Participation P17(0, 33, Q); lesParticipants[16] = P17;
