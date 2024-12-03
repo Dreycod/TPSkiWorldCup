@@ -1,37 +1,90 @@
 #include "Course.h"
+#include "Participation.h"
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
-
-
-
-// Constructeur par défaut
-Course::Course() : nbParticipants(0) {}
-
-
-// Constructeur avec paramètres
-Course::Course(std::string emplacement, std::string date, Competiteur participants[])
+Course::Course(string nomCompetition, string dateCompetition, Participation* lesParticipants)
 {
-    nomCompetition = emplacement;
-    dateCompetition = date;
+	this->nomCompetition = nomCompetition;
+	this->dateCompetition = dateCompetition;
+	this->lesParticipants = lesParticipants;
+}
 
-    for (int i = 0; i < 100; ++i) {
-        participants[i] = participants[i];
-    }
+Course::Course()
+{
+	this->nomCompetition = "";
+	this->dateCompetition = "";
+	this->lesParticipants = NULL;
+}
 
-    std::cout << "localisation " << emplacement << " le " << date << endl;
+Participation* Course::getLesParticipants()
+{
+	return lesParticipants;
+}
 
+bool comp(int a, int b) {
+	return a > b;
+}
+
+void Course::classerLesParticipantsWCSL(bool ordered)
+{
+	int nombreParticipants = lesParticipants[0].getNombreParticipants();
+	Participation* lesParticipants = this->lesParticipants;
+	if (ordered)
+	{
+		std::sort(lesParticipants, lesParticipants + nombreParticipants, [](Participation a, Participation b) { return a.getCompetiteur()->getClassementWCSL() < b.getCompetiteur()->getClassementWCSL(); });
+	}
+	else
+	{
+		std::sort(lesParticipants, lesParticipants + nombreParticipants, [](Participation a, Participation b) { return a.getCompetiteur()->getClassementWCSL() > b.getCompetiteur()->getClassementWCSL(); });
+	}
+}
+
+void Course::classerLesParticipantsFIS(bool ordered)
+{
+	int nombreParticipants = lesParticipants[0].getNombreParticipants();
+	Participation* lesParticipants = this->lesParticipants;
+	if (ordered)
+	{
+		std::sort(lesParticipants, lesParticipants + nombreParticipants,
+			[](Participation a, Participation b) {
+				return a.getCompetiteur()->getClassementFIS() < b.getCompetiteur()->getClassementFIS();
+			});
+	}
+	else
+	{
+		std::sort(lesParticipants, lesParticipants + nombreParticipants,
+			[](Participation a, Participation b) {
+				return a.getCompetiteur()->getClassementFIS() > b.getCompetiteur()->getClassementFIS();
+			});
+	}
 }
 
 
-
-// Méthode pour afficher les participants (méthode par défaut)
-void Course::afficherParticipants()
+void Course::classerLesParticipantsParDossards(bool ordered)
 {
-    for (int i = 0; i < nbParticipants; ++i)
-    {
-        participants[i].afficheEtat();
-    }
+	int nombreParticipants = lesParticipants[0].getNombreParticipants();
+	Participation* lesParticipants = this->lesParticipants;
+	if (ordered)
+	{
+		std::sort(lesParticipants, lesParticipants + nombreParticipants, [](Participation a, Participation b) { return a.getNumDossard() < b.getNumDossard(); });
+	}
+	else
+	{
+		std::sort(lesParticipants, lesParticipants + nombreParticipants, [](Participation a, Participation b) { return a.getNumDossard() > b.getNumDossard(); });
+	}
+
+}
+
+void Course::traitementDossards()
+{
+	//
+}
+
+
+Course::~Course()
+{
 }

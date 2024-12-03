@@ -2,39 +2,20 @@
 #define COMPETITEUR_HPP
 
 #include <string>
-#include "Participation.h"
-
 class Competiteur {
 private:
     int numeroCompetiteur;
-    std::string nomCompetiteur;
-    std::string prenomCompetiteur;
+    string nomCompetiteur;
+    string prenomCompetiteur;
     int classementFIS;
     int classementWCSL;
-
-    Participation participation; // Lien avec l'objet Participation
-
-
 public:
-    Competiteur();
-    Competiteur(int numero, std::string nom, std::string prenom, int fis, int wcsl);
-
-
-
+	Competiteur(int numero, std::string nom, std::string prenom, int FIS, int WCSL);
     int getClassementFIS();
-    int getClassementWCSL();
-
-    void setClassement(int classement); // Définit le classement via Participation
-    int getClassement();
-
-
-    std::string getNomCompetiteur();
-    std::string getPrenomCompetiteur();
-
-    void setNumDossard(int dossard);
-    int getNumDossard();
-
-    void afficheEtat();
+	int getClassementWCSL();
+	std::string getNomCompetiteur();
+	std::string getPrenomCompetiteur();
+	~Competiteur();
 };
 
 #endif // COMPETITEUR_HPP

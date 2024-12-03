@@ -2,36 +2,41 @@
 #include "Participation.h"
 
 using namespace std;
+int Participation::nombreParticipants = 0;
 
-//Constructeur
-
-Participation::Participation() : numDossard(0), classement(0) {}
-
-
-
-//dossard
-
-void Participation::setNumDossard(int dossard) {  //setter num dossard
-    numDossard = dossard;
+Participation::Participation() {
+	this->numDossard = 0;
+	this->classement = 0;
+	this->competiteur = NULL;
 }
 
-int Participation::getNumDossard() { //getter num dossard
-    return numDossard;
+Participation::Participation(int numDossard, int classementFIS, Competiteur* competiteur) {
+	this->numDossard = numDossard;
+	this->classement = classementFIS;
+	this->competiteur = competiteur;
+	nombreParticipants++;
+	cout << nombreParticipants << endl;
 }
 
-
-
-
-
-//classement
-
-void Participation::setClassement(int classement) {  //setter classement
-    classement = classement;
+void Participation::setNumDossard(int numDossard)
+{
+	this->numDossard = numDossard;
 }
 
-int Participation::getClassement() { //getter classement
-    return classement;
+int Participation::getNumDossard()
+{
+	return numDossard;
 }
 
+int Participation::getNombreParticipants()
+{
+	return nombreParticipants;
+}
 
+Competiteur* Participation::getCompetiteur()
+{
+	return competiteur;
+}	
 
+Participation::~Participation() {
+}

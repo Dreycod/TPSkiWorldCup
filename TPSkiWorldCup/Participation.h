@@ -3,25 +3,29 @@
 #ifndef PARTICIPATION_HPP
 #define PARTICIPATION_HPP
 
+#include "Competiteur.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Competiteur; 
+
 class Participation {
 private:
     int numDossard;   // Numéro de dossard
     int classement;   // Classement calculé dans course slalom
-    int scoreFIS;     // Score FIS
-    int scoreWCSL;    // Score WCSL
-    int scoreTotal;
+    Competiteur* competiteur;
+	static int nombreParticipants;
 
 public:
-    Participation();
-
-    void setNumDossard(int dossard);
-    int getNumDossard();
-
-
-    void setClassement(int classement);
-    int getClassement();
-
-
+	Participation(int numDossard, int classement, Competiteur* competiteur);
+    void setNumDossard(int numDossard);
+	Participation();
+	int getNombreParticipants();
+	Competiteur* getCompetiteur();
+	int getNumDossard();
+	~Participation();
 };
 
 #endif // PARTICIPATION_HPP

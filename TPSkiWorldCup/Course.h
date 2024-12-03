@@ -2,28 +2,26 @@
 #define COURSE_HPP
 
 #include <string>
-#include "Competiteur.H"
+#include "Participation.h"
 
 class Course
 {
+private:
+    string nomCompetition;
+    string dateCompetition;
+protected:
+    Participation* lesParticipants;
+    void classerLesParticipants(bool ordered);  // Méthode pour classer les participants (à utiliser dans les sous-classes)
+    void classerLesParticipantsFIS(bool ordered);  // Méthode pour classer les participants par FIS (à utiliser dans les sous-classes)
+    void classerLesParticipantsParDossards(bool ordered);
+	void classerLesParticipantsWCSL(bool ordered);  // Méthode pour classer les participants par WCSL (à utiliser dans les sous-classes)
+    Participation* getLesParticipants();
 public:
+    Course(string emplacement, string date, Participation * lesParticipants);
     Course();  // Constructeur par défaut
 
-    Course(std::string emplacement, std::string date, Competiteur participants[]);
-
-    virtual void traitementDossards() = 0;  // Méthode virtuelle pure pour l'attribution des dossards (implémentation spécifique dans les sous-classes)
-    virtual void afficherParticipants();  // Méthode pour afficher les participants
-
-private:
-    Competiteur participants[100];
-    std::string nomCompetition;
-    std::string dateCompetition;
-
-    int nbParticipants;  // Nombre de participants dans la course
-
-
-protected:
-    void classerLesParticipants();  // Méthode pour classer les participants (à utiliser dans les sous-classes)
+    virtual void traitementDossards() = 0;
+    ~Course();
 };
 
 #endif /* COURSE_HPP */

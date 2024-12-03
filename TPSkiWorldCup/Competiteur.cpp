@@ -1,14 +1,17 @@
 #include "Competiteur.h"
 #include <iostream>
+#include <string>
 
-Competiteur::Competiteur(){}
+using namespace std;
 
-Competiteur::Competiteur(int numero, std::string nom, std::string prenom, int fis, int wcsl) {
-    numeroCompetiteur = numero;
-    nomCompetiteur = nom;
-    prenomCompetiteur = prenom;
-    classementFIS = fis;
-    classementWCSL = wcsl;
+
+Competiteur::Competiteur(int numero, std::string nom, std::string prenom, int fis, int wcsl)
+{
+    this->numeroCompetiteur = numero;
+    this->nomCompetiteur = nom;
+    this->prenomCompetiteur = prenom;
+    this->classementFIS = fis;
+    this->classementWCSL = wcsl;
 
 }
 
@@ -16,39 +19,18 @@ int Competiteur::getClassementFIS() {
     return classementFIS; 
 }
 
-
 int Competiteur::getClassementWCSL() {
     return classementWCSL;
 }
 
-void Competiteur::setClassement(int classement) {
-    participation.setClassement(classement);
-}
 
-std::string Competiteur::getNomCompetiteur() {
+string Competiteur::getNomCompetiteur() {
     return nomCompetiteur;
 }
 
-std::string Competiteur::getPrenomCompetiteur() {
+string Competiteur::getPrenomCompetiteur() {
     return prenomCompetiteur;
 }
 
-void Competiteur::setNumDossard(int dossard) {
-    participation.setNumDossard(dossard);
-}
-
-int Competiteur::getNumDossard() {
-    return participation.getNumDossard();
-}
-
-void Competiteur::afficheEtat() {
-
-
-    std::cout << "Dossard : " << participation.getNumDossard()
-        << " | Classement : " << participation.getClassement() 
-        << " | Numero Competiteur : " << numeroCompetiteur
-        << " | Nom : " << nomCompetiteur
-        << " | Prenom : " << prenomCompetiteur
-        << " | Classement FIS : " << classementFIS
-        << " | Classement WCSL : " << classementWCSL << std::endl;
+Competiteur::~Competiteur() {
 }
