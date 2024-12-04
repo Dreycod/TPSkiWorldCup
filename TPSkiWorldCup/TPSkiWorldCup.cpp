@@ -92,10 +92,7 @@ int main()
 
     // Les participants à la Course Slalom S
     Course_Slalom S("Kitzbühel", "20/01/2025", lesParticipants);
-
-    S.afficherParticipants();
-    cout << "--------------------------------------------------------------------" << endl;
     S.traitementDossards();
-    S.afficherParticipants();
+    S.afficherLesParticipants();
     return 0;
 }

@@ -25,10 +25,6 @@ Participation* Course::getLesParticipants()
 	return lesParticipants;
 }
 
-bool comp(int a, int b) {
-	return a > b;
-}
-
 void Course::classerLesParticipantsWCSL(bool ordered)
 {
 	int nombreParticipants = lesParticipants[0].getNombreParticipants();

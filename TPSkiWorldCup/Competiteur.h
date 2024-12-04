@@ -2,15 +2,17 @@
 #define COMPETITEUR_HPP
 
 #include <string>
+using namespace std;
+
 class Competiteur {
 private:
     int numeroCompetiteur;
-    string nomCompetiteur;
-    string prenomCompetiteur;
+    std::string nomCompetiteur;
+    std::string prenomCompetiteur;
     int classementFIS;
     int classementWCSL;
 public:
-	Competiteur(int numero, std::string nom, std::string prenom, int FIS, int WCSL);
+	Competiteur(int numero, std::string nomCompetiteur, std::string prenomCompetiteur, int FIS, int WCSL);
     int getClassementFIS();
 	int getClassementWCSL();
 	std::string getNomCompetiteur();

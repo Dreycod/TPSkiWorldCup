@@ -14,8 +14,7 @@ Participation::Participation(int numDossard, int classementFIS, Competiteur* com
 	this->numDossard = numDossard;
 	this->classement = classementFIS;
 	this->competiteur = competiteur;
-	nombreParticipants++;
-	cout << nombreParticipants << endl;
+	this->nombreParticipants++;
 }
 
 void Participation::setNumDossard(int numDossard)
@@ -25,17 +24,17 @@ void Participation::setNumDossard(int numDossard)
 
 int Participation::getNumDossard()
 {
-	return numDossard;
+	return this->numDossard;
 }
 
 int Participation::getNombreParticipants()
 {
-	return nombreParticipants;
+	return this->nombreParticipants;
 }
 
 Competiteur* Participation::getCompetiteur()
 {
-	return competiteur;
+	return this->competiteur;
 }	
 
 Participation::~Participation() {

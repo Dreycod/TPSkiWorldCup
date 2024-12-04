@@ -1,21 +1,25 @@
 #include "Course_Slalom.h"
+#include "Course.h"
+#include "Participation.h"
 #include <iostream>
-#include <random> //random
-#include <algorithm> //sort
+#include <string>
+#include <random>
 
 using namespace std;
 
-Course_Slalom::Course_Slalom(string nomCompetition, string dateCompetition, Participation* lesParticipatnts) : Course(nomCompetition, dateCompetition, lesParticipatnts) {
+Course_Slalom::Course_Slalom(string nomCompetition, string dateCompetition, Participation* lesParticipants) : Course(nomCompetition, dateCompetition, lesParticipants)
+{
+    //this->lesParticipants = lesParticipants;
 }
 
-int Course_Slalom::attribuerDossard(int borneInf, int borneSup) 
+void Course_Slalom::attribuerDossard(int numero1, int numero2)
 {
 
     Participation* lesParticipants = this->getLesParticipants();
-    int numeroDossard = 1;
+    int numeroDossard = 0;
 
-    if (borneSup <= 7) {
-        for (int i = borneInf; i <= borneSup; i++) {
+    if (numero2 <= 7) {
+        for (int i = numero1; i <= numero2; i++) {
             do {
                 std::random_device rd;
                 std::mt19937 mt(rd());
@@ -27,8 +31,8 @@ int Course_Slalom::attribuerDossard(int borneInf, int borneSup)
             historiqueDossards[numeroDossard] = true;
         }
     }
-    else if (borneSup <= 15) {
-        for (int i = borneInf; i <= borneSup; i++) {
+    else if (numero2 <= 15) {
+        for (int i = numero1; i <= numero2; i++) {
             do {
                 std::random_device rd;
                 std::mt19937 mt(rd());
@@ -40,57 +44,63 @@ int Course_Slalom::attribuerDossard(int borneInf, int borneSup)
             historiqueDossards[numeroDossard] = true;
         }
     }
-    else if (borneInf > 15 && borneSup <= 30) {
-        for (int i = borneInf; i <= borneSup; i++) {
-            lesParticipants[i].setNumDossard(i);
-            historiqueDossards[i] = true;
+    else if (numero2 <= 30) {
+        for (int i = numero1; i <= numero2; i++) {
+            do {
+                std::random_device rd;
+                std::mt19937 mt(rd());
+                std::uniform_int_distribution<int> dist(16, 30);
+                numeroDossard = dist(mt);
+            } while (historiqueDossards[numeroDossard]);
+
+            lesParticipants[i].setNumDossard(numeroDossard);
+            historiqueDossards[numeroDossard] = true;
         }
     }
-    else if (borneInf > 30) {
-        for (int i = borneInf; i <= borneSup; i++) {
+    else {
+        for (int i = numero1; i <= numero2; i++) {
+            // Trier les derniers participants par FIS et leur attribuer un dossard par ordre
             lesParticipants[i].setNumDossard(i);
-            historiqueDossards[i] = true;
+
         }
     }
 }
 
-void Course_Slalom::traitementDossards() {
+// 8 suivants est random number = 8 à 15 de la WCSL
+// 16 suivants = 16 à 30 de la WCSL mais cette fois dans l'ordre
+// 30 à la fin = ordre des points FIS
+
+void Course_Slalom::traitementDossards()
+{
     int nombreParticipants = lesParticipants->getNombreParticipants();
-    bool ordered = false;
-    Course::classerLesParticipantsFIS(ordered);
-	cout << "-------------------------------------------------------------------------------------------------------------------------------" << endl;
-	afficherParticipants();
-	cout << "-------------------------------------------------------------------------------------------------------------------------------" << endl;
-	attribuerDossard(0, 7);
-	attribuerDossard(8, 15);
-	attribuerDossard(16, 30);
-	Course::classerLesParticipantsFIS(ordered);
-	attribuerDossard(31, 40);
-	cout << "-------------------------------------------------------------------------------------------------------------------------------" << endl;
-	afficherParticipants();
-	cout << "-------------------------------------------------------------------------------------------------------------------------------" << endl;
-    
-	attribuerDossard(30, nombreParticipants);
-	Course::classerLesParticipantsParDossard(ordered);  
+    bool ordered = false; // true = liste triée par classement WCSL croissant, false = décroissant
+
+    Course::classerLesParticipantsWCSL(ordered); // liste WCSL decroissante le plus de point servi en premier!
+
+    attribuerDossard(1, 7);
+    attribuerDossard(8, 15);
+    attribuerDossard(16, 30);
+
+    attribuerDossard(31, nombreParticipants);
+    cout << "------- Par Dossard -------" << endl;
+    afficherLesParticipants();
+    Course::classerLesParticipantsParDossards(!ordered); // j'affiche les dossards dans l'ordre des partants
 }
 
+void Course_Slalom::afficherLesParticipants()
+{
+    Participation* lesParticipants = Course::getLesParticipants();
+    int nombreParticipants = lesParticipants[1].getNombreParticipants();
 
-
-// Affichage des participants
-void Course_Slalom::afficherParticipants() {
-	Participation* lesParticipants = Course::getLesParticipants();
-	int  nombreParticipants = lesParticipants[0].getNombreParticipants();
-    cout << "---- Par Dossard ----" << endl;
-
-	cout << nombreParticipants << " participants" << endl;
-
-    for (int i = 0; i < nombreParticipants;i++)
+    for (int i = 1; i < nombreParticipants; i++)
     {
-		Competiteur* c = lesParticipants[i].getCompetiteur();
-		cout << i + 1 << ". " << c->getNomCompetiteur() << " " << c->getPrenomCompetiteur() << " | Dossard : " << lesParticipants[i].getNumDossard() << " | Classement FIS : " << c->getClassementFIS() << " | Classement WCSL : " << c->getClassementWCSL() << endl;
+        Competiteur* c = lesParticipants[i].getCompetiteur();
+        cout << i << ". " << c->getNomCompetiteur() << " " << c->getPrenomCompetiteur() << " - WCSL: " << c->getClassementWCSL() << " - FIS: " << c->getClassementFIS() << " - Dossard: " << lesParticipants[i].getNumDossard() << endl; // << lesParticipants[i].getgetDossard() << endl;
     }
 }
 
-Course_Slalom::~Course_Slalom() {
-	
+
+Course_Slalom::~Course_Slalom()
+{
+
 }
