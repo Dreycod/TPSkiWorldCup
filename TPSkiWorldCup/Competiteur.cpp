@@ -12,7 +12,6 @@ Competiteur::Competiteur(int numero, std::string nom, std::string prenom, int fi
     this->prenomCompetiteur = prenom;
     this->classementFIS = fis;
     this->classementWCSL = wcsl;
-
 }
 
 int Competiteur::getClassementFIS() {
@@ -22,7 +21,6 @@ int Competiteur::getClassementFIS() {
 int Competiteur::getClassementWCSL() {
     return classementWCSL;
 }
-
 
 string Competiteur::getNomCompetiteur() {
     return nomCompetiteur;

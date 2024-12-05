@@ -27,15 +27,15 @@ int Participation::getNumDossard()
 	return this->numDossard;
 }
 
-int Participation::getNombreParticipants()
-{
-	return this->nombreParticipants;
-}
-
 Competiteur* Participation::getCompetiteur()
 {
 	return this->competiteur;
 }	
+
+int Participation::getNombreParticipants()
+{
+	return nombreParticipants;
+}
 
 Participation::~Participation() {
 }

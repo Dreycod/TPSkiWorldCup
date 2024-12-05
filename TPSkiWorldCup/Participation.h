@@ -20,11 +20,11 @@ private:
 
 public:
 	Participation(int numDossard, int classement, Competiteur* competiteur);
-    void setNumDossard(int numDossard);
 	Participation();
-	int getNombreParticipants();
+    void setNumDossard(int numDossard);
 	Competiteur* getCompetiteur();
 	int getNumDossard();
+	static int getNombreParticipants();
 	~Participation();
 };
 

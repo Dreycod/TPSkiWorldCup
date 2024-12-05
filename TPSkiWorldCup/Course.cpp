@@ -11,6 +11,7 @@ Course::Course(string nomCompetition, string dateCompetition, Participation* les
 	this->nomCompetition = nomCompetition;
 	this->dateCompetition = dateCompetition;
 	this->lesParticipants = lesParticipants;
+	this->nombreParticipants = Participation::getNombreParticipants();
 }
 
 Course::Course()
@@ -20,66 +21,97 @@ Course::Course()
 	this->lesParticipants = NULL;
 }
 
-Participation* Course::getLesParticipants()
-{
-	return lesParticipants;
-}
 
 void Course::classerLesParticipantsWCSL(bool ordered)
 {
-	int nombreParticipants = lesParticipants[0].getNombreParticipants();
 	Participation* lesParticipants = this->lesParticipants;
-	if (ordered)
-	{
-		std::sort(lesParticipants, lesParticipants + nombreParticipants, [](Participation a, Participation b) { return a.getCompetiteur()->getClassementWCSL() < b.getCompetiteur()->getClassementWCSL(); });
-	}
-	else
-	{
-		std::sort(lesParticipants, lesParticipants + nombreParticipants, [](Participation a, Participation b) { return a.getCompetiteur()->getClassementWCSL() > b.getCompetiteur()->getClassementWCSL(); });
-	}
+	
+	
+	// Boolean to track if a swap occurred
+	bool swapped;
+
+	do {
+		swapped = false; // Reset swap flag
+
+		int i = 0;
+		while (i < nombreParticipants - 1) {
+			int classementA = lesParticipants[i].getCompetiteur()->getClassementWCSL();
+			int classementB = lesParticipants[i + 1].getCompetiteur()->getClassementWCSL();
+
+			// If out of order, swap them
+			if (classementA < classementB) {
+				Participation temp = lesParticipants[i];
+				lesParticipants[i] = lesParticipants[i + 1];
+				lesParticipants[i + 1] = temp;
+				swapped = true; // Mark that a swap occurred
+			}
+			i++; // Move to the next pair
+		}
+	} while (swapped); // Continue until no swaps occur
+	
+
 }
 
 void Course::classerLesParticipantsFIS(bool ordered)
 {
-	int nombreParticipants = lesParticipants[0].getNombreParticipants();
 	Participation* lesParticipants = this->lesParticipants;
-	if (ordered)
-	{
-		std::sort(lesParticipants, lesParticipants + nombreParticipants,
-			[](Participation a, Participation b) {
-				return a.getCompetiteur()->getClassementFIS() < b.getCompetiteur()->getClassementFIS();
-			});
-	}
-	else
-	{
-		std::sort(lesParticipants, lesParticipants + nombreParticipants,
-			[](Participation a, Participation b) {
-				return a.getCompetiteur()->getClassementFIS() > b.getCompetiteur()->getClassementFIS();
-			});
-	}
+
+	// Boolean to track if a swap occurred
+	bool swapped;
+
+	do {
+		swapped = false; // Reset swap flag
+
+		int i = 30;
+		while (i < nombreParticipants - 1) {
+			int classementA = lesParticipants[i].getCompetiteur()->getClassementFIS();
+			int classementB = lesParticipants[i + 1].getCompetiteur()->getClassementFIS();
+
+			// If out of order, swap them
+			if (classementA < classementB) {
+				Participation temp = lesParticipants[i];
+				lesParticipants[i] = lesParticipants[i + 1];
+				lesParticipants[i + 1] = temp;
+				swapped = true; // Mark that a swap occurred
+			}
+			i++; // Move to the next pair
+		}
+	} while (swapped); // Continue until no swaps occur
+
 }
 
 
 void Course::classerLesParticipantsParDossards(bool ordered)
 {
-	int nombreParticipants = lesParticipants[0].getNombreParticipants();
 	Participation* lesParticipants = this->lesParticipants;
-	if (ordered)
-	{
-		std::sort(lesParticipants, lesParticipants + nombreParticipants, [](Participation a, Participation b) { return a.getNumDossard() < b.getNumDossard(); });
-	}
-	else
-	{
-		std::sort(lesParticipants, lesParticipants + nombreParticipants, [](Participation a, Participation b) { return a.getNumDossard() > b.getNumDossard(); });
-	}
 
+	// Boolean to track if a swap occurred
+	bool swapped;
+
+	do {
+		swapped = false; // Reset swap flag
+
+		int i = 0;
+		while (i < nombreParticipants - 1) {
+			int classementA = lesParticipants[i].getNumDossard();
+			int classementB = lesParticipants[i + 1].getNumDossard();
+
+			// If out of order, swap them
+			if (classementA > classementB) {
+				Participation temp = lesParticipants[i];
+				lesParticipants[i] = lesParticipants[i + 1];
+				lesParticipants[i + 1] = temp;
+				swapped = true; // Mark that a swap occurred
+			}
+			i++; // Move to the next pair
+		}
+	} while (swapped); // Continue until no swaps occur
 }
 
-void Course::traitementDossards()
+int Course::getNombreParticipants()
 {
-	//
+	return this->nombreParticipants;
 }
-
 
 Course::~Course()
 {

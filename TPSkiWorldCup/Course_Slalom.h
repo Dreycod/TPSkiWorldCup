@@ -10,7 +10,6 @@
 class Course_Slalom : public Course {
 private:
     void attribuerDossard(int borneInf, int borneSup); // Méthode privée pour attribuer un dossard unique
-	bool historiqueDossards[100] = { false }; // Historique des dossards attribués
 public:
     Course_Slalom(string emplacement, string date, Participation* lesParticipants);
 	~Course_Slalom();
